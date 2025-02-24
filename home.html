@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <title>2021 MINI HOMEPAGE</title>
   <link rel="stylesheet" href="./static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hi+Melody&display=swap');
 
@@ -50,7 +51,8 @@
     }
 
     .page {
-
+        
+        
       width: 1065px;
       height: 705px;
       background-color: #d5f7ff;
@@ -119,7 +121,8 @@
     }
 
     .item4 {
-
+        
+      overflow: scroll;
       flex: 2;
       border: 2px solid #d4d4d4;
       border-radius: 9px;
@@ -182,7 +185,7 @@
     .category_box_board {
 
 
-      flex: 0.25;
+      /* flex: 0.25; */
       background-color: #4174d9;
       color: white;
       border-radius: 8px;
@@ -400,49 +403,154 @@
     }
 
     .box1 {
-      width: 250px;
-      height: 300px;
-      background-color: white;
-      float: right;
-      margin-top: 70px;
-      margin-right: 100px;
-      font-size: 15px;
-      text-align: center;
+    width: 250px;
+    height: 300px;
+    background-color: white;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
     }
 
     .search {
-      margin-top: 10px;
-      display: flex;
-      border: 1px solid #ccc;
-      padding: 2px;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
+      height: 15px;
+        margin-top: 10px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  overflow: hidden; /* 넘치는 부분 감추기 */
+  position: relative;
+  width: 180px; /* 원하는 크기로 조정 */
+  background: white;
+  margin-left: 20px;
     }
 
     .search input {
-      border: none;
-      flex: 1;
-      padding: 2px;
-      position: absolute;
-      animation: moveText 5s linear infinite;
+        border: none;
+  background: none;
+  flex: 1;
+  padding: 2px;
+  color: black;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+     
     }
 
-    .search button {
-      background: #ddd;
-      border: none;
-      padding: 2px 5px;
+    .search span {
+  position: absolute;
+  white-space: nowrap;
+  animation: moveText 5s linear infinite;
+}
+
+.search button {
+  background: #ddd;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+   
+
+@keyframes moveText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.comment-box { 
+    border: 1px solid #ddd; 
+    padding: 10px; 
+    margin: 10px 0; 
+}
+.delete-btn { 
+    color: red; 
+    cursor: pointer; 
+}
+#nickname{
+    width: 100px;
+            padding: 5px;
+            margin: 10px;
+            border: 2px solid #bababa;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.pwd{
+    width: 150px;
+            padding: 5px;
+            margin: 10px;
+            border: 2px solid #bababa;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.comment{
+    width: 350px;
+    padding: 5px;
+            margin: 10px;
+            border: 2px solid #bababa;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.submit-btn{
+  font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            background: #f8f8f8;
+            border: 2px solid #ccc;
+            padding: 5px 15px;
+            cursor: pointer;
+            box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.7),
+                        inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+            transition: all 0.1s ease-in-out;
+}
+.popup {
+        display: none; /* 기본적으로 숨김 */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 1000;
     }
 
-    @keyframes moveText {
-      0% {
-        left: 100%;
-      }
-
-      100% {
-        left: -100%;
-      }
+    .popup-content {
+        font-size: 18px;
+        font-weight: bold;
     }
+
+    .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
   </style>
 </head>
 
@@ -451,14 +559,16 @@
     <div class="header">BGM</div>
     <div class="time" id="current-time"></div>
     <div class="search">
-      <input type="text" value="프리스타일 - Y" readonly>
-      <button>🔍</button>
-
-    </div>
-    <div class="controls">
-      <button class="btn">⏪</button>
-      <button class="btn">▶️</button>
-      <button class="btn">⏩</button>
+      <audio id="bgm" loop>
+        <source src="image/fly.mp3" type="audio/mp3">
+        브라우저가 오디오 태그를 지원하지 않습니다.
+    </audio>
+    <span id="songTitle"></span>
+      </div>
+      <div class="controls">
+        <button class="btn">⏪</button>
+        <button class="btn" onclick="toggleBGM()" id="playPauseBtn">🔊 재생</button>
+        <button class="btn">⏩</button>
     </div>
     <div>선물가게 / 추천 BGM</div>
     <div class="recommendations">
@@ -543,6 +653,21 @@
             <div class="Miniroom_content">
               <img src="image/mini.PNG" width="630px" height="350px" style="margin-left: 15px;">
             </div>
+            <div id="app">
+                <h2 class="Miniroom"> 일촌평 </h2>
+                <input v-model="nickname" id="nickname" placeholder="닉네임 입력">
+                <input v-model="password" type="password" class="pwd" placeholder="비밀번호 입력"><br>
+                <textarea v-model="comment" class="comment" rows="4" placeholder="일촌과 나누고 싶은 이야기를 남겨보세요~"></textarea>
+                <button @click="addComment" class="submit-btn">작성하기</button>
+            
+                <div class="comment-list">
+                  <div v-for="(item, index) in comments" :key="index" class="comment-item">
+                    <hr>
+                    <p><strong>{{ item.nickname }}</strong>: {{ item.comment }}</p>
+                  </div>
+                </div>
+              </div>
+              
           </div>
         </div>
 
@@ -554,9 +679,140 @@
             <a href="guest.html"><button>방명록</button></a>
           </div>
         </div>
+
+        <div id="popup" class="popup">
+          <div class="popup-content">
+              <span class="close-btn" onclick="closePopup()">&times;</span>
+              <p>일촌평 기능을 추가했습니다!</p><br>
+              <p>오늘 날짜를 가져오는 캘린더 기능을 추가했습니다!</p>
+              <p>노래 재생 기능을 추가했습니다!</p>
+          </div>
+      </div>
       </div>
     </div>
   </div>
 </body>
 
 </html>
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        nickname: "",
+        password: "",
+        comment: "",
+        comments: []
+      };
+    },
+    methods: {
+      // 댓글 추가
+      addComment() {
+        if (!this.nickname || !this.comment) {
+          alert("닉네임과 내용을 입력하세요!");
+          return;
+        }
+
+        const newComment = {
+          nickname: this.nickname,
+          password: this.password,
+          comment: this.comment
+        };
+
+        this.comments.unshift(newComment); // 최신순 정렬
+        this.comment = ""; // 입력 필드 초기화
+
+        this.saveComments(); // 스토리지에 저장
+      },
+
+      // 댓글 삭제 (비밀번호 검증 포함)
+      deleteComment(index) {
+        const inputPassword = prompt("비밀번호를 입력하세요:");
+        if (inputPassword === this.comments[index].password) {
+          this.comments.splice(index, 1);
+          this.saveComments(); // 삭제 후 저장
+        } else {
+          alert("비밀번호가 틀렸습니다!");
+        }
+      },
+
+      // localStorage에 댓글 저장
+      saveComments() {
+        localStorage.setItem("comments", JSON.stringify(this.comments));
+      },
+
+      // localStorage에서 댓글 불러오기
+      loadComments() {
+        const savedComments = localStorage.getItem("comments");
+        if (savedComments) {
+          this.comments = JSON.parse(savedComments);
+        }
+      }
+    },
+    mounted() {
+      this.loadComments(); // 페이지 로드 시 기존 댓글 불러오기
+    }
+  }).mount("#app");
+
+  function showPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    // 팝업 닫기
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // 페이지 로드 시 팝업 자동 실행
+    window.onload = function() {
+        showPopup();
+    };
+
+ 
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const songTitle = document.getElementById("songTitle");
+
+    const songs = [
+        { title: "에픽하이 - fly", url: "image/fly.mp3" },
+        { title: "에픽하이 - love love love", url: "image/lovelovelove.mp3" },
+        { title: "프리스타일 - Y", url: "image/y.mp3" }
+    ];
+
+    let currentSongIndex = 0; // 현재 재생 중인 곡의 인덱스
+    const bgm = document.getElementById("bgm");
+
+    // 첫 번째 곡으로 초기화
+    bgm.src = songs[currentSongIndex].url;
+    songTitle.textContent = songs[currentSongIndex].title;
+
+    function toggleBGM() {
+        if (bgm.paused) {
+            bgm.play();
+            playPauseBtn.textContent = "⏸️ 일시정지";
+        } else {
+            bgm.pause();
+            playPauseBtn.textContent = "🔊 재생";
+        }
+    }
+
+    function nextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length; // 배열 순환
+        bgm.src = songs[currentSongIndex].url;
+        songTitle.textContent = songs[currentSongIndex].title;
+        bgm.play();
+        playPauseBtn.textContent = "⏸️ 일시정지";
+    }
+
+    // 이전 곡
+    function prevSong() {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length; // 배열 순환
+        bgm.src = songs[currentSongIndex].url;
+        songTitle.textContent = songs[currentSongIndex].title;
+        bgm.play();
+        playPauseBtn.textContent = "⏸️ 일시정지";
+    }
+
+    // 버튼 이벤트
+    document.querySelector(".controls .btn:nth-child(1)").addEventListener("click", prevSong);
+    document.querySelector(".controls .btn:nth-child(3)").addEventListener("click", nextSong);
+</script>
+  
